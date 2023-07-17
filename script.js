@@ -1,3 +1,4 @@
+
 // Get the DOM elements and initialize the game
 const input = document.querySelector("input"),
   guess = document.querySelector(".guess"),
@@ -21,10 +22,12 @@ input.addEventListener("keyup", function (event) {
 });
 
 function checkGuess() {
-  // Decrement the chance variable on every click
-  chance--;
   // Get the value from the input field
   let inputValue = input.value;
+  // Clear the input field
+  input.value = "";
+  // Decrement the chance variable on every guess
+  chance--;
   // Check if the input value is equal to the random number
   if (inputValue == randomNum) {
     // Update guessed number, disable input, check button text and color.
@@ -50,12 +53,10 @@ function checkGuess() {
   if (chance == 0) {
     //Update check button, disable input, and clear input value.
     // Update guessed number text and color to indicate user loss.
-    [checkButton.textContent, input.disabled, inputValue] = ["Replay", true, ""];
+    [checkButton.textContent, input.disabled] = ["Replay", true];
     [guess.textContent, guess.style.color] = ["You lost the game", "#DE0611"];
   }
   if (chance < 0) {
     window.location.reload();
   }
-  // Clear the input field
-  input.value = "";
 }
